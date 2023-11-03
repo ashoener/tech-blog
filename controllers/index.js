@@ -6,7 +6,7 @@ const router = Router();
 router.use(populateLocals);
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { pageSubtitle: "Home" });
 });
 
 export default router;
