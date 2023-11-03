@@ -7,6 +7,8 @@ import { nanoid } from "nanoid";
 import db from "./config/connection.js";
 import routeLoader from "./lib/routeLoader.js";
 
+import { User, Post } from "./lib/models/index.js";
+
 import helpers from "./lib/helpers.js";
 
 const SequelizeStore = connectSequelize(Store);
