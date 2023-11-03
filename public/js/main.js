@@ -3,6 +3,8 @@ const signupForm = document.getElementById("signupForm");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 
+const logoutButton = document.querySelector('a[href="/logout"]');
+
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -48,5 +50,15 @@ if (signupForm) {
       console.log(error);
       alert("todo");
     }
+  });
+}
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const res = await fetch("/api/user/logout", { method: "GET" });
+    if (res.ok) {
+      location.href = "/";
+    } else console.log(await res.json());
   });
 }
