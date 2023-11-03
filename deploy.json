@@ -1,0 +1,5 @@
+{
+  "subdomain": "tech-blog",
+  "install": "npm install",
+  "start": "node index.js"
+}
