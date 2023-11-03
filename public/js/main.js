@@ -20,7 +20,9 @@ if (loginForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
-      location.href = "/";
+      setTimeout(() => {
+        location.href = "/";
+      }, 500);
     } else {
       const error = await res.json();
       console.log(error);
@@ -44,7 +46,9 @@ if (signupForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
-      location.href = "/";
+      setTimeout(() => {
+        location.href = "/";
+      }, 500);
     } else {
       const error = await res.json();
       console.log(error);
