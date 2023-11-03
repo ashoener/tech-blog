@@ -2,6 +2,7 @@
   "name": "tech-blog",
   "version": "1.0.0",
   "author": "Andrew Shoener",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ashoener/tech-blog.git"
