@@ -7,6 +7,8 @@ import { nanoid } from "nanoid";
 import db from "./config/connection.js";
 import routeLoader from "./lib/routeLoader.js";
 
+import helpers from "./lib/helpers.js";
+
 const SequelizeStore = connectSequelize(Store);
 
 const app = express();
@@ -27,7 +29,7 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const hbs = exphbs.create({ extname: ".hbs" });
+const hbs = exphbs.create({ extname: ".hbs", helpers });
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 
