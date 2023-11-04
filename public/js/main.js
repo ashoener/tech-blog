@@ -1,12 +1,14 @@
 const loginForm = document.getElementById("loginForm");
 const signupForm = document.getElementById("signupForm");
 const createPostForm = document.getElementById("createPostForm");
+const updatePostForm = document.getElementById("updatePostForm");
 
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 
 const titleInput = document.getElementById("title");
 const contentInput = document.getElementById("content");
+const idInput = document.getElementById("id");
 
 const logoutButton = document.querySelector('a[href="/logout"]');
 
@@ -30,8 +32,7 @@ if (loginForm) {
       }, 500);
     } else {
       const error = await res.json();
-      console.log(error);
-      alert("todo");
+      renderErrors(error.errors);
     }
   });
 }
@@ -56,8 +57,7 @@ if (signupForm) {
       }, 500);
     } else {
       const error = await res.json();
-      console.log(error);
-      alert("todo");
+      renderErrors(error.errors);
     }
   });
 }
@@ -81,8 +81,31 @@ if (createPostForm) {
       location.href = link;
     } else {
       const error = await res.json();
-      console.log(error);
-      alert("todo");
+      renderErrors(error.errors);
+    }
+  });
+}
+
+if (updatePostForm) {
+  updatePostForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = {
+      title: titleInput.value,
+      content: contentInput.value,
+    };
+    const res = await fetch(`/api/posts/${idInput.value}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      const { link } = await res.json();
+      location.href = link;
+    } else {
+      const error = await res.json();
+      renderErrors(error.errors);
     }
   });
 }
@@ -95,4 +118,16 @@ if (logoutButton) {
       location.href = "/";
     } else console.log(await res.json());
   });
+}
+
+function renderErrors(errors) {
+  const errorsContainer = document.getElementById("errors");
+  errorsContainer.innerHTML = "";
+  errors.forEach((error) => {
+    const errorDiv = document.createElement("div");
+    errorDiv.classList.add("alert", "alert-danger");
+    errorDiv.innerText = error;
+    errorsContainer.appendChild(errorDiv);
+  });
+  errorsContainer.classList.remove("d-none");
 }
