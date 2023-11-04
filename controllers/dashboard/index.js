@@ -1,9 +1,9 @@
 import { Router } from "express";
-import populateLocals from "../lib/middleware/populateLocals.js";
-import { Post, User } from "../lib/models/index.js";
-import sequelize from "../config/connection.js";
+import populateLocals from "../../lib/middleware/populateLocals.js";
+import { Post, User } from "../../lib/models/index.js";
+import sequelize from "../../config/connection.js";
 
-import requireLoggedIn from "../lib/middleware/requireLoggedIn.js";
+import requireLoggedIn from "../../lib/middleware/requireLoggedIn.js";
 
 const router = Router();
 
