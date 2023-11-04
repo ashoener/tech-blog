@@ -25,7 +25,12 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findOne({
+      where: {
+        id: req.params.id,
+        author_id: req.session.user.id,
+      },
+    });
     if (!post)
       return res
         .status(404)
