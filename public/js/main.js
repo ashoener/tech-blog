@@ -11,6 +11,7 @@ const contentInput = document.getElementById("content");
 const idInput = document.getElementById("id");
 
 const logoutButton = document.querySelector('a[href="/logout"]');
+const deletePostButton = document.getElementById("delete");
 
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
@@ -116,7 +117,25 @@ if (logoutButton) {
     const res = await fetch("/api/user/logout", { method: "GET" });
     if (res.ok) {
       location.href = "/";
-    } else console.log(await res.json());
+    } else {
+      const error = await res.json();
+      renderErrors(error.errors);
+    }
+  });
+}
+
+if (deletePostButton) {
+  deletePostButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const res = await fetch(`/api/posts/${idInput.value}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      location.href = "/dashboard";
+    } else {
+      const error = await res.json();
+      renderErrors(error.errors);
+    }
   });
 }
 
