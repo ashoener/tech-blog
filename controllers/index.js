@@ -35,7 +35,6 @@ router.get("/", async (req, res) => {
     ...p,
     content: p.content + (p.content.length < p.content_length ? "..." : ""),
   }));
-  console.log(posts);
   res.render("index", { pageSubtitle: "Home", posts });
 });
 
