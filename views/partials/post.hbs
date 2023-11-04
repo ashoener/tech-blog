@@ -5,6 +5,8 @@
   <div class="card-body">
     <h5 class="card-title">{{author.username}}</h5>
     <p class="card-text">{{content}}</p>
-    <a href="/posts/{{id}}" class="btn btn-primary">View full post</a>
+    {{#if viewButton}}
+      <a href="/posts/{{id}}" class="btn btn-primary">View full post</a>
+    {{/if}}
   </div>
 </div>
