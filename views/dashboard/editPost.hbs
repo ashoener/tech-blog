@@ -1,0 +1,22 @@
+<h2>Edit Post</h2>
+<form id="updatePostForm">
+  <input type="number" id="id" value="{{post.id}}" class="d-none" />
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      placeholder="Title"
+      value="{{post.title}}"
+    />
+  </div>
+  <div class="mb-3">
+    <textarea
+      class="form-control"
+      id="content"
+      rows="10"
+      placeholder="Post Content"
+    >{{post.content}}</textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Update Post</button>
+</form>
