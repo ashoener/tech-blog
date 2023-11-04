@@ -43,5 +43,5 @@ app.use((req, res) => {
   res.status(404).render("404");
 });
 
-await db.sync({ force: false });
+await db.sync({ force: false, alter: false });
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
