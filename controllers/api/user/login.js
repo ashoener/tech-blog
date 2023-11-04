@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     });
     if (!user) {
       await waitUntil(startTime + minimumTime);
-      return res.json({
+      return res.status(401).json({
         success: false,
         errors: ["Invalid username or password"],
       });
@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
     const isCorrect = await user.validatePassword(req.body.password);
     if (!isCorrect) {
       await waitUntil(startTime + minimumTime);
-      return res.json({
+      return res.status(401).json({
         success: false,
         errors: ["Invalid username or password"],
       });
