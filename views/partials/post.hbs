@@ -1,9 +1,12 @@
 <div class="card mb-4">
-  <div class="card-header">
+  <div class="card-header d-flex">
     {{title}}
+    <span class="ms-auto">Posted by
+      {{author.username}}
+      on
+      {{renderDate createdAt}}</span>
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{author.username}}</h5>
     <p class="card-text">{{content}}</p>
     {{#if viewButton}}
       <a href="/posts/{{id}}" class="btn btn-primary">View full post</a>
