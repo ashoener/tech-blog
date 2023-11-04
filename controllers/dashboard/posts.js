@@ -5,8 +5,9 @@ import { Post } from "../../lib/models/index.js";
 const router = Router();
 
 router.get("/:id", async (req, res, next) => {
-  const post = await Post.findByPk(req.params.id, {
+  const post = await Post.findOne({
     where: {
+      id: req.params.id,
       author_id: req.session.user.id,
     },
     raw: true,
