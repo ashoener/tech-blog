@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group mb-4">
   {{#each posts}}
     <a
       href="/posts/{{id}}/edit"
@@ -6,4 +6,7 @@
     >{{title}}
       <span class="ms-auto">{{renderDate createdAt}}</span></a>
   {{/each}}
+</div>
+<div class="text-center">
+  <a href="/dashboard/new-post" class="btn btn-primary mx-auto">New Post</a>
 </div>
