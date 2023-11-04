@@ -1,15 +1,13 @@
 import { Router } from "express";
-import populateLocals from "../../lib/middleware/populateLocals.js";
 import { Post, User } from "../../lib/models/index.js";
-import sequelize from "../../config/connection.js";
 
 import requireLoggedIn from "../../lib/middleware/requireLoggedIn.js";
 
 const router = Router();
 
-router.use(populateLocals);
+router.use(requireLoggedIn);
 
-router.get("/", requireLoggedIn, async (req, res) => {
+router.get("/", async (req, res) => {
   const posts = await Post.findAll({
     order: [["createdAt", "DESC"]],
     include: [
