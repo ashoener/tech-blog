@@ -45,4 +45,23 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const post = await Post.findOne({
+      where: {
+        id: req.params.id,
+        author_id: req.session.user.id,
+      },
+    });
+    if (!post)
+      return res
+        .status(404)
+        .json({ success: false, errors: ["Post not found"] });
+    await post.destroy();
+    res.json({ success: true });
+  } catch (err) {
+    handleError(err, res);
+  }
+});
+
 export default router;
