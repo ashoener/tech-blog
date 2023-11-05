@@ -2,11 +2,11 @@ import { Router } from "express";
 import { Post } from "../../../lib/models/index.js";
 
 import { handleError } from "../../../lib/utils.js";
-import requireLoggedIn from "../../../lib/middleware/requireLoggedIn.js";
+import requireLoggedInApi from "../../../lib/middleware/requireLoggedInApi.js";
 
 const router = Router();
 
-router.use(requireLoggedIn);
+router.use(requireLoggedInApi);
 
 router.get("/", (req, res) => {
   res.send("ok");
