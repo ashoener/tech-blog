@@ -4,6 +4,7 @@
 {{#each post.Comments}}
 {{> comment}}
 {{/each}}
+{{#if loggedIn}}
 <div class="card mb-4">
     <div class="card-header d-flex">
         New Comment
@@ -18,3 +19,4 @@
         </form>
     </div>
 </div>
+{{/if}}
