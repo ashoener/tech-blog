@@ -1,12 +1,16 @@
 import { Router } from "express";
-import { Post } from "../../lib/models/index.js";
+import { Post } from "../../../lib/models/index.js";
 
-import { handleError } from "../../lib/utils.js";
-import requireLoggedIn from "../../lib/middleware/requireLoggedIn.js";
+import { handleError } from "../../../lib/utils.js";
+import requireLoggedIn from "../../../lib/middleware/requireLoggedIn.js";
 
 const router = Router();
 
 router.use(requireLoggedIn);
+
+router.get("/", (req, res) => {
+  res.send("ok");
+});
 
 router.post("/", async (req, res) => {
   try {
