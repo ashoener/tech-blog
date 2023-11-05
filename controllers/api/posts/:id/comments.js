@@ -11,9 +11,9 @@ router.post("/", async (req, res) => {
       content: req.body.content,
       author_id: req.session.user.id,
       post_id: req.params.id,
-    });
-    await newComment.validate();
-    await newComment.save({ validate: false });
+    }); // build a new comment
+    await newComment.validate(); // validate the comment
+    await newComment.save({ validate: false }); // save the comment to the database
     res.json({ success: true });
   } catch (err) {
     handleError(err, res);

@@ -8,6 +8,7 @@ const router = Router();
 router.use(populateLocals);
 
 router.get("/", async (req, res) => {
+  // Find all posts ordered by createdAt descending, with only part of the content
   const posts = (
     await Post.findAll({
       order: [["createdAt", "DESC"]],

@@ -7,6 +7,7 @@ const router = Router();
 
 router.get("/", requireLoggedInApi, async (req, res) => {
   try {
+    // Destroy the session
     req.session.destroy((err) => {
       if (err) return handleError(err, res);
       res.json({ success: true });

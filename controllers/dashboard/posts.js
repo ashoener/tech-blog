@@ -5,6 +5,7 @@ import { Post } from "../../lib/models/index.js";
 const router = Router();
 
 router.get("/:id", async (req, res, next) => {
+  // Ensure that the post exists and that it belongs to the logged in user
   const post = await Post.findOne({
     where: {
       id: req.params.id,
@@ -18,7 +19,7 @@ router.get("/:id", async (req, res, next) => {
       pageSubtitle: "Edit Post",
       post,
     });
-  next();
+  next(); // 404
 });
 
 export default router;

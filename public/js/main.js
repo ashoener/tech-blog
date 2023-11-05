@@ -29,10 +29,12 @@ if (loginForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
+      // if the response is ok, redirect to the home page
       setTimeout(() => {
         location.href = "/";
       }, 500);
     } else {
+      // if the response is not ok, render the errors
       const error = await res.json();
       renderErrors(error.errors);
     }
@@ -54,10 +56,12 @@ if (signupForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
+      // if the response is ok, redirect to the home page
       setTimeout(() => {
         location.href = "/";
       }, 500);
     } else {
+      // if the response is not ok, render the errors
       const error = await res.json();
       renderErrors(error.errors);
     }
@@ -79,6 +83,7 @@ if (createPostForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
+      // if the response is ok, redirect to the dashboard
       location.href = "/dashboard";
     } else {
       const error = await res.json();
@@ -101,8 +106,10 @@ if (addCommentForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
+      // if the response is ok, reload the page
       location.reload();
     } else {
+      // if the response is not ok, render the errors
       const error = await res.json();
       renderErrors(error.errors);
     }
@@ -124,8 +131,10 @@ if (updatePostForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
+      // if the response is ok, redirect to the dashboard
       location.href = "/dashboard";
     } else {
+      // if the response is not ok, render the errors
       const error = await res.json();
       renderErrors(error.errors);
     }
@@ -137,8 +146,10 @@ if (logoutButton) {
     e.preventDefault();
     const res = await fetch("/api/user/logout", { method: "GET" });
     if (res.ok) {
+      // if the response is ok, redirect to the home page
       location.href = "/";
     } else {
+      // if the response is not ok, render the errors
       const error = await res.json();
       renderErrors(error.errors);
     }
@@ -152,8 +163,10 @@ if (deletePostButton) {
       method: "DELETE",
     });
     if (res.ok) {
+      // if the response is ok, redirect to the dashboard
       location.href = "/dashboard";
     } else {
+      // if the response is not ok, render the errors
       const error = await res.json();
       renderErrors(error.errors);
     }
@@ -162,8 +175,9 @@ if (deletePostButton) {
 
 function renderErrors(errors) {
   const errorsContainer = document.getElementById("errors");
-  errorsContainer.innerHTML = "";
+  errorsContainer.innerHTML = ""; // clear the errors container
   errors.forEach((error) => {
+    // for each error, create a new div and append it to the errors container
     const errorDiv = document.createElement("div");
     errorDiv.classList.add("alert", "alert-danger");
     errorDiv.innerText = error;

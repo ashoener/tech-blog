@@ -27,7 +27,7 @@ router.get("/:id", async (req, res, next) => {
       pageSubtitle: post.title,
       post: post.get({ plain: true }),
     });
-  next();
+  next(); // 404
 });
 
 export default router;

@@ -8,6 +8,7 @@ const router = Router();
 router.use(requireLoggedIn);
 
 router.get("/", async (req, res) => {
+  // Find all posts created by the logged in user ordered by createdAt descending
   const posts = await Post.findAll({
     order: [["createdAt", "DESC"]],
     include: [
