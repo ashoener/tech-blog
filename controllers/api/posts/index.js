@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
     });
     await newPost.validate();
     await newPost.save({ validate: false });
-    res.json({ success: true, link: `/posts/${newPost.id}` });
+    res.json({ success: true });
   } catch (err) {
     handleError(err, res);
   }
@@ -43,7 +43,7 @@ router.put("/:id", async (req, res) => {
     post.content = req.body.content;
     await post.validate();
     await post.save({ validate: false });
-    res.json({ success: true, link: `/posts/${post.id}` });
+    res.json({ success: true });
   } catch (err) {
     handleError(err, res);
   }

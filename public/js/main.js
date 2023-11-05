@@ -79,8 +79,7 @@ if (createPostForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
-      const { link } = await res.json();
-      location.href = link;
+      location.href = "/dashboard";
     } else {
       const error = await res.json();
       renderErrors(error.errors);
@@ -125,8 +124,7 @@ if (updatePostForm) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
-      const { link } = await res.json();
-      location.href = link;
+      location.href = "/dashboard";
     } else {
       const error = await res.json();
       renderErrors(error.errors);
