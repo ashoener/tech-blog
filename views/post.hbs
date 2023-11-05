@@ -4,12 +4,12 @@
 {{#each post.Comments}}
 {{> comment}}
 {{/each}}
-{{#if loggedIn}}
 <div class="card mb-4">
     <div class="card-header d-flex">
         New Comment
     </div>
     <div class="card-body">
+        {{#if loggedIn}}
         <form id="addCommentForm">
             <input type="number" id="id" value="{{post.id}}" class="d-none" />
             <div class="mb-3">
@@ -17,6 +17,8 @@
             </div>
             <button type="submit" class="btn btn-primary">Add Comment</button>
         </form>
+        {{else}}
+        <h5>You must be signed in to post a comment.</h5>
+        {{/if}}
     </div>
 </div>
-{{/if}}
