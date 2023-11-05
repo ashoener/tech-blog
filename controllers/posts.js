@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Post, User } from "../lib/models/index.js";
+import { Comment, Post, User } from "../lib/models/index.js";
 
 const router = Router();
 
@@ -10,11 +10,23 @@ router.get("/:id", async (req, res, next) => {
         model: User,
         as: "author",
       },
+      {
+        model: Comment,
+        include: [
+          {
+            model: User,
+            as: "author",
+          },
+        ],
+      },
     ],
-    raw: true,
     nest: true,
   });
-  if (post) return res.render("post", { pageSubtitle: post.title, post });
+  if (post)
+    return res.render("post", {
+      pageSubtitle: post.title,
+      post: post.get({ plain: true }),
+    });
   next();
 });
 
