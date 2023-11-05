@@ -2,6 +2,7 @@ const loginForm = document.getElementById("loginForm");
 const signupForm = document.getElementById("signupForm");
 const createPostForm = document.getElementById("createPostForm");
 const updatePostForm = document.getElementById("updatePostForm");
+const addCommentForm = document.getElementById("addCommentForm");
 
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
@@ -80,6 +81,28 @@ if (createPostForm) {
     if (res.ok) {
       const { link } = await res.json();
       location.href = link;
+    } else {
+      const error = await res.json();
+      renderErrors(error.errors);
+    }
+  });
+}
+
+if (addCommentForm) {
+  addCommentForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = {
+      content: contentInput.value,
+    };
+    const res = await fetch(`/api/posts/${idInput.value}/comments`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      location.reload();
     } else {
       const error = await res.json();
       renderErrors(error.errors);
