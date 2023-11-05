@@ -14,6 +14,16 @@ const idInput = document.getElementById("id");
 const logoutButton = document.querySelector('a[href="/logout"]');
 const deletePostButton = document.getElementById("delete");
 
+let editor;
+if (contentInput) {
+  editor = new toastui.Editor({
+    el: contentInput,
+    initialEditType: "wysiwyg",
+    usageStatistics: false,
+    theme: "dark",
+  });
+}
+
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -73,7 +83,7 @@ if (createPostForm) {
     e.preventDefault();
     const data = {
       title: titleInput.value,
-      content: contentInput.value,
+      content: editor.getMarkdown(),
     };
     const res = await fetch("/api/posts", {
       method: "POST",
@@ -96,7 +106,7 @@ if (addCommentForm) {
   addCommentForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = {
-      content: contentInput.value,
+      content: editor.getMarkdown(),
     };
     const res = await fetch(`/api/posts/${idInput.value}/comments`, {
       method: "POST",
@@ -117,11 +127,14 @@ if (addCommentForm) {
 }
 
 if (updatePostForm) {
+  fetch(`/api/posts/${idInput.value}`)
+    .then((res) => res.json())
+    .then((data) => editor.setMarkdown(data.post.content));
   updatePostForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = {
       title: titleInput.value,
-      content: contentInput.value,
+      content: editor.getMarkdown(),
     };
     const res = await fetch(`/api/posts/${idInput.value}`, {
       method: "PUT",

@@ -7,7 +7,7 @@
       {{renderDate createdAt}}</span>
   </div>
   <div class="card-body">
-    <p class="card-text">{{content}}</p>
+    <p class="card-text">{{{renderMarkdown content}}}</p>
     {{#if viewButton}}
       <a href="/posts/{{id}}" class="btn btn-primary">View full post</a>
     {{/if}}

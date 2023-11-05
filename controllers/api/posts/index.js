@@ -8,10 +8,6 @@ const router = Router();
 
 router.use(requireLoggedInApi);
 
-router.get("/", (req, res) => {
-  res.send("ok");
-});
-
 router.post("/", async (req, res) => {
   try {
     const newPost = Post.build({
@@ -22,6 +18,25 @@ router.post("/", async (req, res) => {
     await newPost.validate(); // validate the post
     await newPost.save({ validate: false }); // save the post to the database
     res.json({ success: true });
+  } catch (err) {
+    handleError(err, res);
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findOne({
+      where: {
+        id: req.params.id,
+        author_id: req.session.user.id,
+      },
+    });
+    if (!post) {
+      return res
+        .status(404)
+        .json({ success: false, errors: ["Post not found"] });
+    }
+    res.json({ success: true, post });
   } catch (err) {
     handleError(err, res);
   }
