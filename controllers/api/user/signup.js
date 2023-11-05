@@ -5,7 +5,7 @@ import { handleError, waitUntil } from "../../../lib/utils.js";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
+router.post("/", requireLoggedOutApi, async (req, res) => {
   try {
     const newUser = User.build(req.body);
     await newUser.validate();

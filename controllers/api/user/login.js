@@ -2,16 +2,12 @@ import { Router } from "express";
 import { User } from "../../../lib/models/index.js";
 
 import { handleError, waitUntil } from "../../../lib/utils.js";
+import requireLoggedOutApi from "../../../lib/middleware/requireLoggedOutApi.js";
 
 const router = Router();
 
 const minimumTime = 300; // Minimum request time in ms
-router.post("/", async (req, res) => {
-  if (req.session.loggedIn)
-    return res.json({
-      success: false,
-      errors: ["Already logged in"],
-    });
+router.post("/", requireLoggedOutApi, async (req, res) => {
   const startTime = Date.now();
   const newUser = User.build(req.body);
   try {
