@@ -49,4 +49,6 @@ app.use((req, res) => {
 });
 
 await db.sync({ force: false, alter: false });
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+app.listen(PORT, "127.0.0.1", () =>
+  console.log(`Listening on http://localhost:${PORT}`)
+);
