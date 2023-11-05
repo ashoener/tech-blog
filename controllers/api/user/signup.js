@@ -3,6 +3,8 @@ import { User } from "../../../lib/models/index.js";
 
 import { handleError, waitUntil } from "../../../lib/utils.js";
 
+import requireLoggedOutApi from "../../../lib/middleware/requireLoggedOutApi.js";
+
 const router = Router();
 
 router.post("/", requireLoggedOutApi, async (req, res) => {
